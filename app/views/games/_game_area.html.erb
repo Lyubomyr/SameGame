@@ -1,0 +1,10 @@
+<table id = "game">
+  <% @matrix.each do |row| %>
+      <tr>
+              <% row.each do |color| %>
+                    <td><%=  color %></td>
+              <% end %>
+      </tr>
+  <% end %>
+
+</table>
