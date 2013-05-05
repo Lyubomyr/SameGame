@@ -2,7 +2,7 @@
 <h3>Game Info</h3>
 <strong>Game field:</strong> <%= @game.width.to_s + " X " + @game.height.to_s %></br>
 <strong>Colors: </strong><%= @game.colors %></br>
-<strong>Score: </strong>
+<strong>Score: </strong><b id = "score"><%= @game.score %></b></br>
 
 <% else %>
     <h3>Restore Game</h3>

@@ -1,10 +1,11 @@
-<table id = "game">
-  <% @matrix.each do |row| %>
-      <tr>
-              <% row.each do |color| %>
-                    <td><%=  color %></td>
-              <% end %>
-      </tr>
-  <% end %>
+<% balls = ['blue.png', 'green.png', 'grey.png', 'orange.png', 'pink.png', 'red.png', 'yellow.png', 'darkgreen.png',  'darkblue.png', 'lightgreen.png']  %>
 
+<table id = "play_ground">
+    <% @matrix.each do |row| %>
+        <tr>
+              <% row.each do |color| %>
+                    <td><%=  image_tag "balls/#{balls[color]}", :size => "40x40", :alt => color %></td>
+              <% end %>
+        </tr>
+    <% end %>
 </table>

@@ -1,5 +1,8 @@
 Samegame::Application.routes.draw do
-  resources :games, accept: [:edit, :delete]
+  resources :games, except: [:edit, :delete] do
+      post 'select_group', on: :member
+      post 'update_game', on: :member
+  end
 
   post 'restore_game' => 'games#restore_game', as: :restore_game
 
