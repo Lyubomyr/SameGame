@@ -7,8 +7,10 @@ class CreateGames < ActiveRecord::Migration
       t.integer :colors
       t.integer :score
       t.text :matrix
+      t.string :slug
 
       t.timestamps
     end
+    add_index :games, :slug, unique: true
   end
 end

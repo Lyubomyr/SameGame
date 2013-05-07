@@ -1,0 +1,7 @@
+<% balls = ['blue.png', 'green.png', 'grey.png', 'orange.png', 'pink.png', 'red.png', 'yellow.png', 'darkgreen.png',  'darkblue.png', 'lightgreen.png'] %>;
+
+<% @added.each do |ball| %>
+                console.log('<%= ball %>');
+        var $ul = $('#play_ground ul').eq(<%= ball[:col] %>);
+        $ul.prepend('<li>'+'<%=  image_tag "balls/#{balls[ball[:color]]}", :size => "38x38", :alt => ball[:color] %>'+'</li>');
+<% end %>

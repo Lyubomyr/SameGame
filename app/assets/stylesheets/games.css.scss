@@ -1,8 +1,33 @@
   #content{
-    height: 550px;
+    min-height: 550px;
   }
 
   #play_ground  td{
        border: 1px solid grey;
   }
 
+  label{
+      font-weight: bold;
+  }
+
+  #fields{
+    margin-left: 60px;
+  }
+
+ul{
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    vertical-align: bottom;
+    width: 38px;
+}
+
+ul li{
+    display: block;
+    width: 38px;
+    height: 38px;
+    border: 1px solid lightgrey;
+    padding: 1px;
+    vertical-align: bottom;
+    text-align: center;
+}

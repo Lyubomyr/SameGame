@@ -20,8 +20,11 @@ ActiveRecord::Schema.define(:version => 20130426055440) do
     t.integer  "colors"
     t.integer  "score"
     t.text     "matrix"
+    t.string   "slug"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "games", ["slug"], :name => "index_games_on_slug", :unique => true
 
 end

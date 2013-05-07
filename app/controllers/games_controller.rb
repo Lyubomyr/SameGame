@@ -6,7 +6,7 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find(params[:id])
+    @game = Game.find_by_user(params[:id])
     @matrix = @game.matrix
   end
 
@@ -39,28 +39,31 @@ class GamesController < ApplicationController
 def select_group
     id = params[:id]
     ball = params[:ball]
-    matrix =  Game.find(id).matrix
+    matrix =  Game.find_by_user(id).matrix
     selected = find_group(ball, matrix)
 
     render :json => selected
   end
 
   def update_game
-    id = params[:id]
-    ball = params[:ball]
-    game =  Game.find(id)
-    matrix = game.matrix
-    selected = find_group(ball, matrix)
+        id = params[:id]
+        ball = params[:ball]
+        game =  Game.find_by_user(id)
+        matrix = game.matrix
+        selected = find_group(ball, matrix)
 
-    update_matrix(selected)
-    result = addBalls(game.colors)
-    @matrix = result[:matrix]
-    l =result[:added].size
-    @score = game.score + 2**(l-2)
-     game.update_attribute(:matrix, @matrix)
-     game.update_attribute(:score, @score)
+        if selected
+            deleted = update_matrix(selected)
+            added = addBalls(game.colors)
+            score = update_db(game, added)
 
-    # render :json => @matrix
+            render :json => {selected: selected, deleted: deleted, added: added, score: score}
+        end
+  end
+
+  def add_balls
+      @added = params[:added]
+      # render :js => 'add_balls.js.erb'
   end
 
 end

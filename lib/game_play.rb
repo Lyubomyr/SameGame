@@ -22,7 +22,7 @@ module GamePlay
         @sel_index = 0
 
         find_neighbors(ball)
-        return @selected
+        @selected.size > 1 ? (return @selected) : nil
     end
 
     def find_neighbors(ball)
@@ -48,13 +48,13 @@ module GamePlay
     end
 
     def update_matrix(selected)
-        shift = {}
+        shift = {} # {col: dleted_balls} == {1: 2, 5: 1}
         selected.each do |ball|
             @matrix[ball[:row]][ball[:col]] = nil
              shift.has_key?(ball[:col]) ? shift[ball[:col]] += 1 : shift[ball[:col]] = 1
         end
-        # @matrix.map {|row| row.compact!}
         shift_matrix(shift)
+        return shift
     end
 
     def shift_matrix(shift)
@@ -88,7 +88,15 @@ module GamePlay
               end
           end
       end
-          return {matrix: @matrix, added: added}
+          added = added.sort_by { |ball| ball[:row] }
+          return added.reverse!
     end
+
+        def update_db(game, added)
+            score = game.score + 2**(added.size-2)
+            game.update_attribute(:matrix, @matrix)
+            game.update_attribute(:score, score)
+            return score
+        end
 end
 
