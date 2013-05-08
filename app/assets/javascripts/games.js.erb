@@ -10,10 +10,10 @@ getBallAttr: function($li) {
 makeBallsSelected: function(balls){
     play_ground.makeBallsUnselected();
     for (var ball in balls){
-        var $li = $('#play_ground ul').eq(balls[ball].col).children().eq(balls[ball].row)
-        var img_src = $li.children().attr('src').split('.');
-        var new_img_src = img_src[0]+"_s." + img_src[1];
-        $li.children().attr('src', new_img_src);
+        var $li = $('div#play_ground ul').eq(balls[ball].col).children().eq(balls[ball].row)
+        var color = $li.children().attr('alt');
+        var colors = $('div#play_ground').data('colors_s');
+        $li.children().attr({src: colors[color]});
         $li.addClass('selected');
     }
 },
@@ -48,14 +48,13 @@ updateBalls: function(selected, added){
 },
 
 addBalls: function(added){
-      var curr_url = window.location.pathname;
-      $.ajax({
-            contentType: "application/json",
-            dataType: "script",
-            type: "POST",
-            url: curr_url + '/add_balls',
-            data:  JSON.stringify({added: added})
-        });
+    for (var ball in added){
+        var colors = $('div#play_ground').data('colors');
+        var color = added[ball].color;
+        var $ul = $('#play_ground ul').eq(added[ball].col);
+        $ul.prepend('<li style = "display:none"><img src ='+colors[color]+' alt = '+color+'></li>');
+        $ul.children().fadeIn("slow");
+    };
 },
 
 addBallss: function(added){
@@ -120,8 +119,10 @@ updateGame:  function (){
                   url: curr_url + '/update_game',
                   data:  JSON.stringify(li),
                   success: function(data){
-                    game.updateScore(data.score);
-                    play_ground.updateBalls(data.selected, data.added);
+                    if (data.selected){
+                        game.updateScore(data.score);
+                        play_ground.updateBalls(data.selected, data.added);
+                    }
                   }
               });
       });

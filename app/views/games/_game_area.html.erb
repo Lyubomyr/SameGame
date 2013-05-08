@@ -1,11 +1,12 @@
-<% balls = ['blue.png', 'green.png', 'grey.png', 'orange.png', 'pink.png', 'red.png', 'yellow.png', 'darkgreen.png',  'darkblue.png', 'lightgreen.png']  %>
+<% balls = [asset_path('balls/blue.png'), asset_path('balls/green.png'), asset_path('balls/grey.png'), asset_path('balls/orange.png'), asset_path('balls/pink.png'), asset_path('balls/red.png'), asset_path('balls/yellow.png'), asset_path('balls/darkgreen.png'), asset_path( 'balls/darkblue.png'), asset_path('balls/lightgreen.png')]  %>
+<%balls_s = [asset_path('balls/blue_s.png'), asset_path('balls/green_s.png'), asset_path('balls/grey_s.png'), asset_path('balls/orange_s.png'), asset_path('balls/pink_s.png'), asset_path('balls/red_s.png'), asset_path('balls/yellow_s.png'), asset_path('balls/darkgreen_s.png'), asset_path('balls/darkblue_s.png'), asset_path('balls/lightgreen_s.png')]  %>
 
-<div id = "play_ground">
+<div id = "play_ground" data-colors = "<%= balls %>" data-colors_s = "<%=  balls_s%>" >
     <% for col in @matrix %>
           <ul>
               <% for color in col %>
                   <li>
-                       <%=  image_tag "balls/#{balls[color]}", :size => "38x38", :alt => color %>
+                       <%= image_tag "#{balls[color]}", :alt => color %>
                   </li>
               <% end %>
           </ul>

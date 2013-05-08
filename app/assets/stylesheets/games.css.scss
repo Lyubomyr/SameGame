@@ -2,19 +2,19 @@
     min-height: 550px;
   }
 
-  #play_ground  td{
+  #field  td{
        border: 1px solid grey;
   }
 
-  #content label{
+  label{
       font-weight: bold;
   }
 
- #content  #fields{
+  #fields{
     margin-left: 60px;
   }
 
- #content ul{
+ul{
     display: inline-block;
     padding: 0;
     margin: 0;
@@ -22,7 +22,7 @@
     width: 38px;
 }
 
- #content ul li{
+ul li{
     display: block;
     width: 38px;
     height: 38px;

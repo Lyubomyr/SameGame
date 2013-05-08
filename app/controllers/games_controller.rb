@@ -58,12 +58,9 @@ def select_group
             score = update_db(game, added)
 
             render :json => {selected: selected, deleted: deleted, added: added, score: score}
+        else
+            render :json => {selected: nil}
         end
-  end
-
-  def add_balls
-      @added = params[:added]
-      # render :js => 'add_balls.js.erb'
   end
 
 end
