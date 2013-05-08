@@ -6,15 +6,15 @@
        border: 1px solid grey;
   }
 
-  label{
+  #content label{
       font-weight: bold;
   }
 
-  #fields{
+ #content  #fields{
     margin-left: 60px;
   }
 
-ul{
+ #content ul{
     display: inline-block;
     padding: 0;
     margin: 0;
@@ -22,7 +22,7 @@ ul{
     width: 38px;
 }
 
-ul li{
+ #content ul li{
     display: block;
     width: 38px;
     height: 38px;
