@@ -2,7 +2,7 @@
     min-height: 550px;
   }
 
-  #field  td{
+  #play_ground  td{
        border: 1px solid grey;
   }
 
@@ -14,7 +14,7 @@
     margin-left: 60px;
   }
 
-ul{
+ #play_ground ul{
     display: inline-block;
     padding: 0;
     margin: 0;
@@ -22,7 +22,7 @@ ul{
     width: 38px;
 }
 
-ul li{
+ #play_ground ul li{
     display: block;
     width: 38px;
     height: 38px;

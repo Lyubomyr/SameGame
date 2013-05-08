@@ -10,7 +10,7 @@ getBallAttr: function($li) {
 makeBallsSelected: function(balls){
     play_ground.makeBallsUnselected();
     for (var ball in balls){
-        var $li = $('div#play_ground ul').eq(balls[ball].col).children().eq(balls[ball].row)
+        var $li = $('div#play_ground ul').eq(balls[ball].col).children().eq(balls[ball].row);
         var color = $li.children().attr('alt');
         var colors = $('div#play_ground').data('colors_s');
         $li.children().attr({src: colors[color]});
@@ -23,9 +23,9 @@ makeBallsUnselected: function(){
     if (balls.length  > 0){
           for (var ball = 0; ball < balls.length; ball++){
               $li = $(balls[ball]);
-              var new_img_src = $li.children().attr('src').split('_s');
-              var img_src = new_img_src[0] + new_img_src[1];
-              $li.children().attr('src', img_src);
+              var color = $li.children().attr('alt');
+              var colors = $('div#play_ground').data('colors');
+              $li.children().attr({src: colors[color]});
               $li.removeAttr('class');
           }
     }
@@ -55,15 +55,6 @@ addBalls: function(added){
         $ul.prepend('<li style = "display:none"><img src ='+colors[color]+' alt = '+color+'></li>');
         $ul.children().fadeIn("slow");
     };
-},
-
-addBallss: function(added){
-      for (var ball in added){
-          var $ul = $('#play_ground ul').eq(added[ball].col);
-          // var $li = $('#play_ground ul').eq(added[ball].col).children().eq(added[ball].row);
-          var c = added[ball].color;
-          // $ul.prepend('<li><img height="38" width="38" src="/assets/balls/"'+colors[c]+' alt="'+c+'"></li>');
-      }
 }
 };
 
