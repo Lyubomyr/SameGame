@@ -122,7 +122,6 @@ updateGame:  function (){
                   success: function(data){
                     game.updateScore(data.score);
                     play_ground.updateBalls(data.selected, data.added);
-                                  console.log(data.added);
                   }
               });
       });

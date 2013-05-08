@@ -8,10 +8,10 @@ module GamePlay
     def generate_matrix(game)
           matrix = []
 
-          game.height.times  do |row_i|
-                row = []
-                game.width.times{|col| row[col] = rnd(game.colors-1)}
-                matrix[row_i] = row
+          game.width.times  do |col_i|
+                col = []
+                game.height.times{|row| col[row] = rnd(game.colors-1)}
+                matrix[col_i] = col
           end
           return matrix
     end
@@ -42,15 +42,14 @@ module GamePlay
 
     def is_same_color(n_row, n_col, color)
           ball = {row: n_row, col: n_col, color: color}
-          # debugger
-          return nil unless (@matrix[n_row].present?) && (n_row >= 0) && (n_col >=0)
-          (@selected.include?(ball) == false) && (@matrix[n_row][n_col] == color) ? ball : nil
+          return nil unless (@matrix[n_col].present?) && (n_row >= 0) && (n_col >=0)
+          (@selected.include?(ball) == false) && (@matrix[n_col][n_row] == color) ? ball : nil
     end
 
     def update_matrix(selected)
-        shift = {} # {col: dleted_balls} == {1: 2, 5: 1}
+        shift = {} # {col: deleted_balls} == {1: 2, 5: 1}
         selected.each do |ball|
-            @matrix[ball[:row]][ball[:col]] = nil
+            @matrix[ball[:col]][ball[:row]] = nil
              shift.has_key?(ball[:col]) ? shift[ball[:col]] += 1 : shift[ball[:col]] = 1
         end
         shift_matrix(shift)
@@ -59,32 +58,21 @@ module GamePlay
 
     def shift_matrix(shift)
         shift.each_key do |col_i|
-            @matrix.each_index do |row_i|
-                  unless @matrix[row_i][col_i]
-                      normalize_column(col_i, row_i, shift[col_i])
-                  end
-            end
-        end
-    end
-
-    def normalize_column(col_i, nil_i, size)
-        size.times do |nils|
-            nil_i.times do |i|
-                @matrix[nil_i-1-i+nils][col_i], @matrix[nil_i-i+nils][col_i]=@matrix[nil_i-i+nils][col_i],@matrix[nil_i-1-i+nils][col_i]
-            end
+            @matrix[col_i].compact!
+              shift[col_i].times do
+                  @matrix[col_i].unshift(nil)
+              end
         end
     end
 
     def addBalls(colors)
       added = []
-      @matrix.each_index do |row_i|
-          row = @matrix[row_i]
-          row.each_index do |col_i|
-              col = row[col_i]
-              unless @matrix[row_i][col_i]
+      @matrix.each_index do |col_i|
+          @matrix[col_i].each_index do |row_i|
+              unless @matrix[col_i][row_i]
                   color = rnd(colors-1)
                   added.push({row: row_i, col: col_i, color: color})
-                  @matrix[row_i][col_i] = color
+                  @matrix[col_i][row_i] = color
               end
           end
       end

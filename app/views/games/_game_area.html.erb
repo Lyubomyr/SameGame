@@ -1,11 +1,11 @@
 <% balls = ['blue.png', 'green.png', 'grey.png', 'orange.png', 'pink.png', 'red.png', 'yellow.png', 'darkgreen.png',  'darkblue.png', 'lightgreen.png']  %>
 
 <div id = "play_ground">
-    <% @matrix[0].size.times do |col| %>
+    <% for col in @matrix %>
           <ul>
-              <% @matrix.size.times do |row| %>
+              <% for color in col %>
                   <li>
-                       <%=  image_tag "balls/#{balls[@matrix[row][col]]}", :size => "38x38", :alt => @matrix[row][col] %>
+                       <%=  image_tag "balls/#{balls[color]}", :size => "38x38", :alt => color %>
                   </li>
               <% end %>
           </ul>
